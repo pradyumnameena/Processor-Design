@@ -99,3 +99,21 @@ There are many ways in which the task of an instruction may be split into steps 
 3. The data path need not bother about sequencing of the steps or deciding whether a step is required or not. That is the job of the controller. In every cycle, the controller instructs the datapath to perform some step or micro-operations.<br/>
 
 ## Part - 3 (Controller)
+### Aim
+This note gives a brief description of various modules that constitute the controller for multi-cycle processor design of Lab assignment 5 (reference Lectures 12 and 13).
+
+### Instruction Decoder (Combinational)
+It looks at the relevant instruction bits and determines the class, such as (DP | DT | MUL | B), sub-class such as (arith | logic | test) or (ldr | str | ldrh | strh | ldrb | strb | ldrsh | ldrsb), and variant, such as (imm | reg_imm | reg_reg) for the current instruction. It also indicates whether the instruction is implemented or unimplemented or undefined. The decoder needs to look at bits 27-20 and 11-4 of the instruction.
+
+### Flag check Unit or Bctrl Unit (Combinational)
+It looks the four flags (V, C, Z, N) to determine if the condition specified by the instruction bits 31-28 is true or not. Note that if the condition field is “1111”, the instruction is undefined.
+
+### ALU control or Actrl (Combinational)
+This is adequately described by slides 4 and 5 of Lecture 13.
+
+### Main Controller (Sequential)
+This module may be divided into two parts in order to keep each part simpler.
+#### Controller FSM (sequential)
+This part includes control state register and the next state logic. A wide range of choices exists in defining the states. One extreme is to define enough states so the all control signals can be derived only from the control state in Moore style. The other extreme is to have only m states where m is the maximum number of cycles any instruction takes. Inputs to Controller FSM are those decoder outputs that influence state transitions. Output of the Controller FSM is the control state.
+#### Control Signal Generator (Combinational)
+Outputs of this module are the control signals. The inputs are control state and some decoder outputs. Depending upon how states are defined, this module may need to look at all the decoder outputs in one extreme scenario and may not look at any decoder output in the other extreme scenario. Some of the control signals need to be ANDed with Bctrl output and the signal enabling flag setting needs to be further ANDed with S bit of instruction.
