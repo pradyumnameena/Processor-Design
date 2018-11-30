@@ -22,8 +22,7 @@ Atomic swap: swp<br/>
 PSR transfer: mrs, msr<br/>
 Multiply long: mull, mlal<br/>
 
-### Note
-Instruction swi will be added later. Following are the building blocks
+Instruction swi will be added later. Following are the building blocks :-
 
 ### ALU
 Inputs : two 32-bit operands, operation to be performed, carry<br/>
