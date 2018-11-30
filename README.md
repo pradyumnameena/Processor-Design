@@ -92,3 +92,8 @@ There are many ways in which the task of an instruction may be split into steps 
 3. Read addend from Rm of register file, if it is MLA instruction. Perform multiplication.<br/>
 4. Perform addition, if it is MLA instruction.<br/>
 5. Write result into register Rd of register file.<br/>
+
+### Notes
+1. Actions shown in blue should be performed subject to the condition specified by IR[31-28] being satisfied.<br/>
+2. The first step in all the instructions is common. It will help in simplifying controller design if the second step for all instructions is also made common (that is, always read from Rn and Rm, whether required or not). Then controller can look at the instruction type in step 2 and decide to follow different sequences for different cases from step 3 onwards.<br/>
+3. The data path need not bother about sequencing of the steps or deciding whether a step is required or not. That is the job of the controller. In every cycle, the controller instructs the datapath to perform some step or micro-operations.<br/>
