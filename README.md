@@ -80,3 +80,15 @@ There are many ways in which the task of an instruction may be split into steps 
 4. Add/subtract offset to base. In case of store instruction, read data from Rd of register file.<br/>
 5. Perform memory read/write using address with/without offset (depending upon pre/post indexing). Write address (with offset) into register Rn of register file, if required.<br/>
 6. Write the data read from memory into register Rd of register file in case of a load instruction.<br/>
+
+### Branch Group
+1. Fetch instruction from memory, address given by PC. Add 4 to PC. <br/>  
+2. In case of BL instruction, write PC into lr register in register file. Add 4 to PC.<br/>
+3. Add offset to PC.<br/>
+
+### Multiply Group
+1. Fetch instruction from memory, address given by PC. Add 4 to PC.<br/>
+2. Read multiplicands from Rn and Rs of register file.<br/>
+3. Read addend from Rm of register file, if it is MLA instruction. Perform multiplication.<br/>
+4. Perform addition, if it is MLA instruction.<br/>
+5. Write result into register Rd of register file.<br/>
