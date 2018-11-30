@@ -70,3 +70,13 @@ There are many ways in which the task of an instruction may be split into steps 
 4. Shift/rotate operand2, if required.<br/>
 5. Perform DP operation. Set flags if required.<br/>
 6. Write result into register Rd of register file, if it is not compare or test sub-group instruction.<br/>
+
+### DT Group
+1. Fetch instruction from memory, address given by PC. Add 4 to PC.<br/>
+2. Read base/offset from register file.<br/>
+      a. Read base address from Rn in all cases<br/>
+      b. Read offset from Rm, if it is specified by a register<br/>
+3. Shift/rotate the offset, if required.<br/>
+4. Add/subtract offset to base. In case of store instruction, read data from Rd of register file.<br/>
+5. Perform memory read/write using address with/without offset (depending upon pre/post indexing). Write address (with offset) into register Rn of register file, if required.<br/>
+6. Write the data read from memory into register Rd of register file in case of a load instruction.<br/>
