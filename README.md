@@ -27,9 +27,8 @@ Instruction swi will be added later. Following are the building blocks
 
 ### ALU
 Inputs : two 32-bit operands, operation to be performed, carry<br/>
-Outputs : 32-bit result of arithmetic/logical operation, next flag values
+Outputs : 32-bit result of arithmetic/logical operation, next flag values<br/>
 
-#### Functionality : 
 It is a combinational circuit that performs the arithmetic/logical operations for the DP instructions. The “operation to be performed” input can come from the opcode field of DP instructions.
 
 Its ability to add/subtract is also used by other instructions by giving appropriate inputs. This includes address offset addition/subtraction for DT and b|bl instructions as well as addition required in mla instruction. The ALU need not inherently know whether the addition it is doing is for add or ldr or bl or mla.
